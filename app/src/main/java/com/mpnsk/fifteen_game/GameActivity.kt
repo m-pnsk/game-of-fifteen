@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.ViewTreeObserver
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
@@ -20,7 +21,7 @@ import kotlin.streams.toList
 class GameActivity : AppCompatActivity() {
     companion object {
         var matrixSize = 4
-        var deskSize = 950
+        var deskSize = -1
     }
 
     private lateinit var binding: ActivityGameBinding
@@ -32,21 +33,37 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        images = Desk(MainActivity.imgUri!!, matrixSize, deskSize).getSplitImage(contentResolver)
-        bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce_anim)
-        binding.header.findViewById<ImageButton>(R.id.homeButton).setOnClickListener {
-            startActivity(
-                Intent(
-                    this@GameActivity,
-                    MainActivity::class.java
+
+        if (deskSize == -1) {
+            binding.grid.viewTreeObserver.addOnGlobalLayoutListener(object :
+                ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    val parentWidth = binding.grid.width
+                    if (parentWidth > 0) {
+                        deskSize = parentWidth - binding.grid.paddingStart * 2
+                        binding.grid.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                        restartActivity()
+                    }
+                }
+            })
+        } else {
+            bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce_anim)
+            images =
+                Desk(MainActivity.imgUri!!, matrixSize, deskSize).getSplitImage(contentResolver)
+            binding.header.findViewById<ImageButton>(R.id.homeButton).setOnClickListener {
+                startActivity(
+                    Intent(
+                        this@GameActivity,
+                        MainActivity::class.java
+                    )
                 )
-            )
+            }
+            binding.header.findViewById<ImageButton>(R.id.reloadButton).setOnClickListener {
+                restartActivity()
+            }
+            initGame()
+            displayGame()
         }
-        binding.header.findViewById<ImageButton>(R.id.reloadButton).setOnClickListener {
-            restartActivity()
-        }
-        initGame()
-        displayGame()
     }
 
     private fun initGame() {
