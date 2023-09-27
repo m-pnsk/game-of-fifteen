@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wood_background"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/inputLayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/image_button_background"
+        android:orientation="horizontal"
+        android:padding="5sp"
+        app:layout_constraintBottom_toTopOf="@+id/start_game_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/sizeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="7dp"
+            android:text="@string/game_size"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/sizeInput"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:digits="23456789"
+            android:textAlignment="center"
+            android:textColor="#807B7B"
+            android:textStyle="bold"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:maxLength="1"
+            android:text="@string/default_size"
+            tools:ignore="LabelFor" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/start_game_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textSize="22sp"
+        app:layout_constraintDimensionRatio="1:1"
+        android:text="@string/start_button_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/upload_img_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textSize="22sp"
+        app:layout_constraintDimensionRatio="1:1"
+        android:text="@string/upload_img"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_game_button" />
+</androidx.constraintlayout.widget.ConstraintLayout>
