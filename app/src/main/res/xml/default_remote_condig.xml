@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>main_link</key>
+        <value>www.google.com/</value>
+    </entry>
+    <entry>
+        <key>privacypolicy_link</key>
+        <value>www.google.com/</value>
+    </entry>
+    <entry>
+        <key>loading_phrase</key>
+        <value>Fetching config…</value>
+    </entry>
+</defaultsMap>
+    <!-- END xml_defaults -->

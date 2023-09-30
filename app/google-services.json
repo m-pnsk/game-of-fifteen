@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "859624269835",
+    "project_id": "game-of-fifteen-c74f1",
+    "storage_bucket": "game-of-fifteen-c74f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859624269835:android:4487ecb13df87937247f0e",
+        "android_client_info": {
+          "package_name": "com.mpnsk.fifteen_game"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAspAqs_RNlSVh5Kzs1AZl80CikDFBd2ZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

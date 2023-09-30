@@ -1,6 +1,5 @@
 package com.mpnsk.fifteen_game.model
 
-import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.widget.ImageView
 import androidx.gridlayout.widget.GridLayout
@@ -32,7 +31,6 @@ class Tail(val imageView: ImageView) {
         if (tail.id == matrixSize * matrixSize) {
             tail.setImageResource(R.drawable.image_border)
         }
-
         return this
     }
 
