@@ -2,10 +2,15 @@ package com.mpnsk.fifteen_game
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.WindowCompat
 import com.mpnsk.fifteen_game.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -24,9 +29,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        fullScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        imgUri = Uri.parse("android.resource://com.mpnsk.fifteen_game/${R.drawable.default_image}")
         binding.uploadImgButton.setOnClickListener {
             galleryLauncher.launch(
                 Intent(Intent.ACTION_PICK)
@@ -35,7 +40,8 @@ class MainActivity : AppCompatActivity() {
         }
         binding.startGameButton.setOnClickListener {
             val stringMatrixSize = binding.sizeInput.text.toString()
-            GameActivity.matrixSize = if (stringMatrixSize.isNotEmpty()) stringMatrixSize.toInt() else 4
+            GameActivity.matrixSize =
+                if (stringMatrixSize.isNotEmpty()) stringMatrixSize.toInt() else 4
             startActivity(
                 Intent(
                     this@MainActivity,
@@ -43,5 +49,14 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
+    }
+
+    private fun fullScreen() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        window.decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                )
     }
 }

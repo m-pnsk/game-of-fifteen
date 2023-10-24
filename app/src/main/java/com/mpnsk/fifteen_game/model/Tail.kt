@@ -13,7 +13,7 @@ class Tail(val imageView: ImageView) {
         j: Int,
         id: Int,
         matrixSize: Int,
-        images: List<Bitmap>,
+        image: Bitmap,
         moveTail: (currentTail: Tail) -> Unit
     ): Tail {
         val tail = this.imageView
@@ -27,9 +27,9 @@ class Tail(val imageView: ImageView) {
         tail.setOnClickListener {
             moveTail(this)
         }
-        tail.setImageBitmap(images[id])
+        tail.setImageBitmap(image)
         if (tail.id == matrixSize * matrixSize) {
-            tail.setImageResource(R.drawable.image_border)
+            tail.setImageBitmap(Bitmap.createBitmap(image.width, image.height, Bitmap.Config.ARGB_8888))
         }
         return this
     }

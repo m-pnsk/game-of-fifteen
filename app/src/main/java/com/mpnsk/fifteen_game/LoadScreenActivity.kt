@@ -2,10 +2,16 @@ package com.mpnsk.fifteen_game
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.mpnsk.fifteen_game.databinding.ActivityLoadScreenBinding
 import com.mpnsk.fifteen_game.lib.RemoteConfigManager
@@ -22,6 +28,8 @@ class LoadScreenActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        fullScreen()
+
         binding = ActivityLoadScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
         remoteConfigManager = FirebaseRemoteConfigManagerImpl()
@@ -43,7 +51,7 @@ class LoadScreenActivity : AppCompatActivity() {
         }
 
         Thread {
-            Thread.sleep(3000) // for demonstrating
+            Thread.sleep(1500) // for demonstrating
             loadNextActivity()
         }.start()
     }
@@ -78,5 +86,14 @@ class LoadScreenActivity : AppCompatActivity() {
             return false
         }
         return true
+    }
+
+    private fun fullScreen() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        window.decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                )
     }
 }

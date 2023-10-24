@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Fifteengame" parent="Base.Theme.Fifteengame">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:statusBarColor">@color/transperant</item>
+    </style>
+</resources>

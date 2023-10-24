@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="body">#DEB886</color>
+    <color name="transperant">#43000000</color>
 </resources>

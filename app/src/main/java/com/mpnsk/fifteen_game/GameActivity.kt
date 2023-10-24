@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -11,6 +12,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import com.mpnsk.fifteen_game.databinding.ActivityGameBinding
 import com.mpnsk.fifteen_game.model.Desk
 import com.mpnsk.fifteen_game.model.Tail
@@ -31,6 +33,7 @@ class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        fullScreen()
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -48,8 +51,11 @@ class GameActivity : AppCompatActivity() {
             })
         } else {
             bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce_anim)
-            images =
-                Desk(MainActivity.imgUri!!, matrixSize, deskSize).getSplitImage(contentResolver)
+            images = if (MainActivity.imgUri == null) {
+                Desk(matrixSize, deskSize).getDefaultImage()
+            } else {
+                Desk(matrixSize, deskSize).getSplitImage(MainActivity.imgUri!!, contentResolver)
+            }
             binding.header.findViewById<ImageButton>(R.id.homeButton).setOnClickListener {
                 startActivity(
                     Intent(
@@ -116,7 +122,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun createTail(i: Int, j: Int): Tail {
         val tailView = ImageView(this)
-        return Tail(tailView).init(i, j, tails.size, matrixSize, images, ::moveTail)
+        return Tail(tailView).init(i, j, tails.size, matrixSize, images[tails.size], ::moveTail)
     }
 
     @SuppressLint("SetTextI18n")
@@ -165,5 +171,14 @@ class GameActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()
+    }
+
+    private fun fullScreen() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        window.decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                )
     }
 }
