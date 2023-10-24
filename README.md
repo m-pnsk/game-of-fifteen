@@ -6,6 +6,6 @@
 3. Import the sample into Android Studio.
 4. Build and run the sample.
 ### Method 2
-1. Download APK file from https://drive.google.com/file/d/1w0RuD3KdM1rx-Edyx4h6cTe7ZDy6dWnM/view?usp=sharing
+1. Download APK file from https://drive.google.com/drive/folders/1wkx6XhgdKS-od1k5wBhnr2MldJcG4zNe?usp=sharing
 2. Install on your device
 3. Run application
